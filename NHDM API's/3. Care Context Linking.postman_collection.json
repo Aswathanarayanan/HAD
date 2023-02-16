@@ -1,0 +1,201 @@
+{
+	"info": {
+		"_postman_id": "96a45d2a-f3b8-4bdd-9978-3cc7f7ae6578",
+		"name": "3. Care Context Linking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25899123"
+	},
+	"item": [
+		{
+			"name": "M2 · Add Care Contexts",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{AUTH_TOKEN}}",
+						"type": "text"
+					},
+					{
+						"key": "X-CM-ID",
+						"value": "sbx",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestId\": \"{{$guid}}\",\n    \"timestamp\": \"{{$isoTimestamp}}\",\n    \"link\": {\n        \"accessToken\": \"\",\n        \"patient\": {\n            \"referenceNumber\": \"PUID-00001\",\n            \"display\": \"Ranveer Uppal\",\n            \"careContexts\": [\n                {\n                    \"referenceNumber\": \"visit-{{$guid}}\",\n                    \"display\": \"Consultation on {{$randomDatePast}}\"\n                }\n            ]\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dev.abdm.gov.in/gateway/v0.5/links/link/add-contexts",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"abdm",
+						"gov",
+						"in"
+					],
+					"path": [
+						"gateway",
+						"v0.5",
+						"links",
+						"link",
+						"add-contexts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "M2 · SMS Notify",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{AUTH_TOKEN}}",
+						"type": "text"
+					},
+					{
+						"key": "X-CM-ID",
+						"value": "sbx",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestId\": \"{{$guid}}\",\n    \"timestamp\": \"{{$isoTimestamp}}\",\n    \"notification\": {\n        \"phoneNo\": \"+91-9811023100\",\n        \"hip\": {\n            \"name\": \"DEMO HIP 2\",\n            \"id\": \"demo-hip-0002\"\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dev.abdm.gov.in/gateway/v0.5/patients/sms/notify2",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"abdm",
+						"gov",
+						"in"
+					],
+					"path": [
+						"gateway",
+						"v0.5",
+						"patients",
+						"sms",
+						"notify2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "M2 · On Discover Care Contexts [Hit on Pipedream]",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestId\": \"{{$guid}}\",\n    \"timestamp\": \"{{timestamp}}\",\n    \"transactionId\": \"e9bd5544-fb5d-4a74-ad49-64ab76bd9f65\",\n    \"patient\": {\n        \"referenceNumber\": \"pat-1\",\n        \"display\": \"fred\",\n        \"careContexts\": [\n            {\n                \"referenceNumber\": \"cc01\",\n                \"display\": \"20-jan-2000-checkup\"\n            }\n        ],\n        \"matchedBy\": [\n            \"MOBILE\"\n        ]\n    },\n    \"resp\": {\n        \"requestId\": \"8643802d-811d-4fb3-a19d-72f6c142ee2\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dev.abdm.gov.in/gateway/v0.5/care-contexts/on-discover",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"abdm",
+						"gov",
+						"in"
+					],
+					"path": [
+						"gateway",
+						"v0.5",
+						"care-contexts",
+						"on-discover"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "M2 · On Init Link [Hit on Pipedream]",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestId\": {{$guid}},\n    \"timestamp\": {{$isoTimestamp}},\n    \"transactionId\": \"\",\n    \"link\": {\n        \"referenceNumber\": \"\",\n        \"authenticationType\": \"DIRECT\",\n        \"meta\": {\n            \"communicationMedium\": \"MOBILE\",\n            \"communicationHint\": \"string\",\n            \"communicationExpiry\": {{$randomDateFuture}}\n        }\n    },\n    \"error\": null,\n    \"resp\": {\n        \"requestId\": \"\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dev.abdm.gov.in/gateway/v0.5/links/link/on-init",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"abdm",
+						"gov",
+						"in"
+					],
+					"path": [
+						"gateway",
+						"v0.5",
+						"links",
+						"link",
+						"on-init"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "M2 · On Confirm Link [Hit on Pipedream]",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestId\": {{$guid}},\n    \"timestamp\": {{$isoTimestamp}},\n    \"patient\": {\n        \"referenceNumber\": \"PUID-000001\",\n        \"display\": \"Ranveer Uppal\",\n        \"careContexts\": [\n            {\n                \"referenceNumber\": \"visit-99999\",\n                \"display\": \"Test consultation on 18th November\"\n            }\n        ],\n    },\n    \"error\": null,\n    \"resp\": {\n        \"requestId\": \"\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dev.abdm.gov.in/gateway/v0.5/links/link/on-confirm",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"abdm",
+						"gov",
+						"in"
+					],
+					"path": [
+						"gateway",
+						"v0.5",
+						"links",
+						"link",
+						"on-confirm"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

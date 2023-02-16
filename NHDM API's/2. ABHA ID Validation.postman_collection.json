@@ -1,0 +1,194 @@
+{
+	"info": {
+		"_postman_id": "1ab8d4c9-d727-42e5-9452-d227df9274e0",
+		"name": "2. ABHA ID Validation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25899123"
+	},
+	"item": [
+		{
+			"name": "M2 · Fetch Auth Modes",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{AUTH_TOKEN}}",
+						"type": "text"
+					},
+					{
+						"key": "X-CM-ID",
+						"value": "sbx",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestId\": \"{{$guid}}\",\n    \"timestamp\": \"{{$isoTimestamp}}\",\n    \"query\": {\n        \"id\": \"ranveeru@sbx\",\n        \"purpose\": \"KYC_AND_LINK\",\n        \"requester\": {\n            \"type\": \"HIP\",\n            \"id\": \"{{facilityId}}\"\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dev.abdm.gov.in/gateway/v0.5/users/auth/fetch-modes",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"abdm",
+						"gov",
+						"in"
+					],
+					"path": [
+						"gateway",
+						"v0.5",
+						"users",
+						"auth",
+						"fetch-modes"
+					]
+				},
+				"description": "This is the gateway bound API to fetch all possible authentication modes for a particular ABHA ID"
+			},
+			"response": []
+		},
+		{
+			"name": "M2 · Init Auth",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{AUTH_TOKEN}}",
+						"type": "text"
+					},
+					{
+						"key": "X-CM-ID",
+						"value": "sbx",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestId\": \"{{$guid}}\",\n    \"timestamp\": \"{{$isoTimestamp}}\",\n    \"query\": {\n        \"id\": \"ranveeru@sbx\",\n        \"purpose\": \"KYC_AND_LINK\",\n        \"authMode\": \"MOBILE_OTP\",\n        \"requester\": {\n            \"type\": \"HIP\",\n            \"id\": \"{{facilityId}}\"\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dev.abdm.gov.in/gateway/v0.5/users/auth/init",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"abdm",
+						"gov",
+						"in"
+					],
+					"path": [
+						"gateway",
+						"v0.5",
+						"users",
+						"auth",
+						"init"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "M2 · Confirm Auth",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Update user creation token\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.environment.set(\"CURRENT_LINKING_TOKEN\", jsonData.accessToken);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{AUTH_TOKEN}}",
+						"type": "text"
+					},
+					{
+						"key": "X-CM-ID",
+						"value": "sbx",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestId\": \"{{$guid}}\",\n    \"timestamp\": \"{{$isoTimestamp}}\",\n    \"transactionId\": \"ad0a1176-897b-4306-8642-1ae60fbaa257\",\n    \"credential\": {\n        \"demographic\": {\n            \"name\": \"Ranveer Uppal\",\n            \"gender\": \"M\",\n            \"dateOfBirth\": \"1998-08-05\"\n        },\n        \"authCode\": \"\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dev.abdm.gov.in/gateway/v0.5/users/auth/confirm",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"abdm",
+						"gov",
+						"in"
+					],
+					"path": [
+						"gateway",
+						"v0.5",
+						"users",
+						"auth",
+						"confirm"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "M2 · On Share Profile [Hit on Pipedream]",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestId\": \"{{$guid}}\",\n    \"timestamp\": \"{{$isoTimestamp}}\",\n    \"acknowledgement\": {\n        \"status\": \"SUCCESS\",\n        \"healthId\": \"<username>@<suffix>\",\n        \"tokenNumber\": \"string\"\n    },\n    \"error\": null,\n    \"resp\": {\n        \"requestId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dev.abdm.gov.in/gateway/v1.0/patients/profile/on-share",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"abdm",
+						"gov",
+						"in"
+					],
+					"path": [
+						"gateway",
+						"v1.0",
+						"patients",
+						"profile",
+						"on-share"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

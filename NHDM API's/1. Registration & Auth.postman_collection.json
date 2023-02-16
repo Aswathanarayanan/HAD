@@ -1,0 +1,168 @@
+{
+	"info": {
+		"_postman_id": "fc752174-d6e0-45cc-a614-96251d4aad08",
+		"name": "1. Registration & Auth",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25899123"
+	},
+	"item": [
+		{
+			"name": "Fetch Auth Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Update user creation token\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.environment.set(\"AUTH_TOKEN\", \"Bearer \" + jsonData.accessToken);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"clientId\": \"{{CLIENT_ID}}\",\n    \"clientSecret\": \"{{CLIENT_SECRET}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dev.abdm.gov.in/gateway/v0.5/sessions",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"abdm",
+						"gov",
+						"in"
+					],
+					"path": [
+						"gateway",
+						"v0.5",
+						"sessions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register HRP Host",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{AUTH_TOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"url\": \"https://eo7b99wi5spufhy.m.pipedream.net\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dev.abdm.gov.in/devservice/v1/bridges",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"abdm",
+						"gov",
+						"in"
+					],
+					"path": [
+						"devservice",
+						"v1",
+						"bridges"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register Facility",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{AUTH_TOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"id\": \"demo-hip-0006\",\n        \"name\": \"Demo HIP 6\",\n        \"type\": \"HIP\",\n        \"active\": true,\n        \"alias\": [\n            \"demo-hip-0006\"\n        ]\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dev.abdm.gov.in/devservice/v1/bridges/addUpdateServices",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"abdm",
+						"gov",
+						"in"
+					],
+					"path": [
+						"devservice",
+						"v1",
+						"bridges",
+						"addUpdateServices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Registered Facilities",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{AUTH_TOKEN}}",
+						"type": "text"
+					},
+					{
+						"key": "X-CM-ID",
+						"value": "sbx",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://dev.abdm.gov.in/devservice/v1/bridges/getServices",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"abdm",
+						"gov",
+						"in"
+					],
+					"path": [
+						"devservice",
+						"v1",
+						"bridges",
+						"getServices"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

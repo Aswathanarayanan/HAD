@@ -1,0 +1,165 @@
+{
+	"info": {
+		"_postman_id": "f6eabba7-911d-4721-a0aa-26f834ca02b7",
+		"name": "4. Data Transfer as HIP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25899123"
+	},
+	"item": [
+		{
+			"name": "M2 · On Notify Consent [Hit on Pipedream]",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{AUTH_TOKEN}}",
+						"type": "text"
+					},
+					{
+						"key": "X-CM-ID",
+						"value": "sbx",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestId\": \"{{$guid}}\",\n    \"timestamp\": \"{{timestamp}}\",\n    \"acknowledgement\": {\n        \"status\": \"OK\",\n        \"consentId\": \"557dab65-2c4f-440a-95dc-dfb7d87c4a51\"\n    },\n    \"resp\": {\n        \"requestId\": \"3feea156-d380-4187-9a62-2cc85b2782cd\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dev.abdm.gov.in/gateway/v0.5/consents/hip/on-notify",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"abdm",
+						"gov",
+						"in"
+					],
+					"path": [
+						"gateway",
+						"v0.5",
+						"consents",
+						"hip",
+						"on-notify"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "M2 · On Request Health Info.",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestId\": \"{{$guid}}\",\n    \"timestamp\": \"{{timestamp}}\",\n    \"hiRequest\": {\n        \"transactionId\": \"68d47d3f-2229-437c-b245-a704b54f4ae4\",\n        \"sessionStatus\": \"ACKNOWLEDGED\"\n    },\n    \"resp\": {\n        \"requestId\": \"7fc8faa0-50ac-4ab2-a629-dc45f90e7fdd\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dev.abdm.gov.in/gateway/v0.5/health-information/hip/on-request",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"abdm",
+						"gov",
+						"in"
+					],
+					"path": [
+						"gateway",
+						"v0.5",
+						"health-information",
+						"hip",
+						"on-request"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "M2 · Data Push (HIU Endpoint)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"pageNumber\": 0,\n    \"pageCount\": 1,\n    \"transactionId\": \"\",\n    \"entries\": [\n        {\n            \"content\": \"\",\n            \"media\": \"application/fhir+json\",\n            \"checksum\": \"string\",\n            \"careContextReference\": \"DEMO-26-001\"\n        }\n    ],\n    \"keyMaterial\": {\n        \"cryptoAlg\": \"ECDH\",\n        \"curve\": \"Curve25519\",\n        \"dhPublicKey\": {\n            \"expiry\": \"2020-10-06T10:50:37.764Z\",\n            \"parameters\": \"Curve25519/32byte random key\",\n            \"keyValue\": \"\"\n        },\n        \"nonce\": \"\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dev.abdm.gov.in/patient-hiu/data/notification",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"abdm",
+						"gov",
+						"in"
+					],
+					"path": [
+						"patient-hiu",
+						"data",
+						"notification"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "M2 · Data Push Notification",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{AUTH_TOKEN}}",
+						"type": "text"
+					},
+					{
+						"key": "X-CM-ID",
+						"value": "sbx",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestId\": \"{{$guid}}\",\n    \"timestamp\": \"{{$isoTimestamp}}\",\n    \"notification\": {\n        \"consentId\": \"\",\n        \"transactionId\": \"\",\n        \"doneAt\": \"{{$isoTimestamp}}\",\n        \"notifier\": {\n            \"type\": \"HIP\",\n            \"id\": \"\"\n        },\n        \"statusNotification\": {\n            \"sessionStatus\": \"TRANSFERRED\",\n            \"hipId\": \"\",\n            \"statusResponses\": [\n                {\n                    \"careContextReference\": \"\",\n                    \"hiStatus\": \"OK\",\n                    \"description\": \"\"\n                }\n            ]\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dev.abdm.gov.in/gateway/v0.5/health-information/notify",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"abdm",
+						"gov",
+						"in"
+					],
+					"path": [
+						"gateway",
+						"v0.5",
+						"health-information",
+						"notify"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
