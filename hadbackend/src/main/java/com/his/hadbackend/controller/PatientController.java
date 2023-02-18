@@ -1,4 +1,4 @@
-package com.his.hadbackend.Controller;
+package com.his.hadbackend.controller;
 
 import com.his.hadbackend.model.Patient;
 import com.his.hadbackend.service.PatientService;

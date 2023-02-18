@@ -1,7 +1,7 @@
 package com.his.hadbackend.service;
 
 import com.his.hadbackend.model.Patient;
-import com.his.hadbackend.dao.PatientRepository;
+import com.his.hadbackend.repository.PatientRepository;
 import org.springframework.stereotype.Service;
 
 @Service
