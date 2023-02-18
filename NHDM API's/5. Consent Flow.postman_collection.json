@@ -1,0 +1,232 @@
+{
+	"info": {
+		"_postman_id": "b6a0bc0c-bbd5-483a-bb4d-1bfe7883afd5",
+		"name": "5. Consent Flow",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25899123"
+	},
+	"item": [
+		{
+			"name": "M3 · Consent Init",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{AUTH_TOKEN}}",
+						"type": "text"
+					},
+					{
+						"key": "X-CM-ID",
+						"value": "sbx",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestId\": \"{{$guid}}\",\n    \"timestamp\": \"{{$isoTimestamp}}\",\n    \"consent\": {\n        \"purpose\": {\n            \"text\": \"string\",\n            \"code\": \"CAREMGT\"\n        },\n        \"patient\": {\n            \"id\": \"ranveeru@sbx\"\n        },\n        \"hiu\": {\n            \"id\": \"{{facilityId}}\"\n        },\n        \"requester\": {\n            \"name\": \"Dr. Saurabh Tripathi\",\n            \"identifier\": {\n                \"type\": \"REGNO\",\n                \"value\": \"MH1001\",\n                \"system\": \"https://www.mciindia.org\"\n            }\n        },\n        \"hiTypes\": [\n            \"OPConsultation\"\n        ],\n        \"permission\": {\n            \"accessMode\": \"VIEW\",\n            \"dateRange\": {\n                \"from\": \"2022-09-25T12:52:34.925Z\",\n                \"to\": \"2022-11-15T12:52:34.925Z\"\n            },\n            \"dataEraseAt\": \"2022-11-25T12:52:34.925Z\",\n            \"frequency\": {\n                \"unit\": \"HOUR\",\n                \"value\": 1,\n                \"repeats\": 0\n            }\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dev.abdm.gov.in/gateway/v0.5/consent-requests/init",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"abdm",
+						"gov",
+						"in"
+					],
+					"path": [
+						"gateway",
+						"v0.5",
+						"consent-requests",
+						"init"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "M3 · On Notify Consent",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{AUTH_TOKEN}}",
+						"type": "text"
+					},
+					{
+						"key": "X-CM-ID",
+						"value": "sbx",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestId\": \"{{$guid}}\",\n    \"timestamp\": \"{{$isoTimestamp}}\",\n    \"acknowledgement\": [\n        {\n            \"status\": \"OK\",\n            \"consentId\": \"86fa75d7-d001-4067-a1cc-db56aeda8b0e\"\n        }\n    ],\n    \"resp\": {\n        \"requestId\": \"7c42b7a7-399e-4d0d-beb3-75cecb10b220\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dev.abdm.gov.in/gateway/v0.5/consents/hiu/on-notify",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"abdm",
+						"gov",
+						"in"
+					],
+					"path": [
+						"gateway",
+						"v0.5",
+						"consents",
+						"hiu",
+						"on-notify"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "M3 · Fetch Consent Artefact",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{AUTH_TOKEN}}",
+						"type": "text"
+					},
+					{
+						"key": "X-CM-ID",
+						"value": "sbx",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestId\": \"{{$guid}}\",\n    \"timestamp\": \"{{$isoTimestamp}}\",\n    \"consentId\": \"40e3c5b4-5e31-4f81-bac9-5761fef8e57d\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dev.abdm.gov.in/gateway/v0.5/consents/fetch",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"abdm",
+						"gov",
+						"in"
+					],
+					"path": [
+						"gateway",
+						"v0.5",
+						"consents",
+						"fetch"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "M3 · Request Health Info.",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{AUTH_TOKEN}}",
+						"type": "text"
+					},
+					{
+						"key": "X-CM-ID",
+						"value": "sbx",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestId\": \"{{$guid}}\",\n    \"timestamp\": \"{{$isoTimestamp}}\",\n    \"hiRequest\": {\n        \"consent\": {\n            \"id\": \"0cf4e328-2a7e-42f7-94bb-b31cce3b5d5f\"\n        },\n        \"dateRange\": {\n            \"from\": \"2022-10-25T12:30:29.592\",\n            \"to\": \"2022-11-27T12:30:29.592\"\n        },\n        \"dataPushUrl\": \"https://eo7b99wi5spufhy.m.pipedream.net/data/push\",\n        \"keyMaterial\": {\n            \"cryptoAlg\": \"ECDH\",\n            \"curve\": \"Curve25519\",\n            \"dhPublicKey\": {\n                \"expiry\": \"2022-12-26T10:25:26.274Z\",\n                \"parameters\": \"Curve25519/32byte random key\",\n                \"keyValue\": \"MIIBMTCB6gYHKoZIzj0CATCB3gIBATArBgcqhkjOPQEBAiB/////////////////////////////////////////7TBEBCAqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqYSRShRAQge0Je0Je0Je0Je0Je0Je0Je0Je0Je0Je0JgtenHcQyGQEQQQqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq0kWiCuGaG4oIa04B7dLHdI0UySPU1+bXxhsinpxaJ+ztPZAiAQAAAAAAAAAAAAAAAAAAAAFN753qL3nNZYEmMaXPXT7QIBCANCAARND3zc+G5wP45LWQIEMu+zhTnw+QiFiRC7uKbO9sJAJRyeFPcpCi3Nc4e6GQweUlcBapM8ymEW+9yREa+Dm42f\"\n            },\n            \"nonce\": \"2n3xPpiF00nn+nDVfPH8Zx1VESqBMBB6BUQ/yYW2Ba8=\"\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dev.abdm.gov.in/gateway/v0.5/health-information/cm/request",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"abdm",
+						"gov",
+						"in"
+					],
+					"path": [
+						"gateway",
+						"v0.5",
+						"health-information",
+						"cm",
+						"request"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "M3 · Data Receipt Notification",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{AUTH_TOKEN}}",
+						"type": "text"
+					},
+					{
+						"key": "X-CM-ID",
+						"value": "sbx",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestId\": \"{{$guid}}\",\n    \"timestamp\": \"{{$isoTimestamp}}\",\n    \"notification\": {\n        \"consentId\": \"\",\n        \"transactionId\": \"\",\n        \"doneAt\": \"{{$isoTimestamp}}\",\n        \"notifier\": {\n            \"type\": \"HIU\",\n            \"id\": \"\"\n        },\n        \"statusNotification\": {\n            \"sessionStatus\": \"TRANSFERRED\",\n            \"hipId\": \"\",\n            \"statusResponses\": [\n                {\n                    \"careContextReference\": \"\",\n                    \"hiStatus\": \"OK\",\n                    \"description\": \"\"\n                }\n            ]\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dev.abdm.gov.in/gateway/v0.5/health-information/notify",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"abdm",
+						"gov",
+						"in"
+					],
+					"path": [
+						"gateway",
+						"v0.5",
+						"health-information",
+						"notify"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

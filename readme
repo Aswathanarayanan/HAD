@@ -1,0 +1,53 @@
+In software development, the terms "controller," "service," "repository" and "model" are commonly used to refer to different components of a software application.
+
+
+Note- DAO and Repository are two different design patterns that aim to separate the application or business logic from the persistence layer or data access layer. DAO provides a simple and consistent interface for performing CRUD operations on the database, while Repository provides a higher level of abstraction, hiding the implementation details of the persistence layer.
+
+
+
+In a typical Spring Boot project, the src folder usually contains the following sub-folders to organize the application source code:
+
+src/
+├── main/
+│   ├── java/
+│   │   └── com/
+│   │       └── example/
+│   │           └── demo/
+│   │               ├── controller/
+│   │               ├── service/
+│   │               ├── repository/
+│   │               └── model/
+│   ├── resources/
+│   └── webapp/
+└── test/
+    ├── java/
+    │   └── com/
+    │       └── example/
+    │           └── demo/
+    │               └── service/
+    └── resources/
+    
+    
+Here's a brief description of each sub-folder:
+
+controller: This folder contains the controller classes for the application. These classes handle incoming HTTP requests and provide a response to the client.
+
+service: This folder contains the service classes for the application. These classes contain the business logic of the application and are responsible for interacting with the data layer.
+
+repository (or dao): This folder contains the repository or data access object (DAO) classes for the application. These classes are responsible for interacting with the database or other data sources to retrieve or update data.
+
+model: This folder contains the domain or model classes for the application. These classes represent the data objects used in the application.
+
+resources: This folder contains non-Java resources such as property files, configuration files, static resources, and templates.
+
+webapp: This folder is used to store web application resources, such as JSPs, HTML files, and other web assets. This folder is only created if you select the "Web" option when you create your project.
+
+test: This folder contains the test code and resources for the application. The contents of this folder will not be included in the application artifact, but they are important for testing your application.
+
+In summary, the src folder in a Spring Boot project usually contains the main and test sub-folders, with main further organized into controller, service, repository, and model sub-folders to organize the application code.
+
+
+
+
+prateek chhimwal
+@autowired in sprin
