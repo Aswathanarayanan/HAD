@@ -7,7 +7,7 @@ const Menu=()=>{
         <div>
            <div className="mb-2">
                 <Button variant="primary" size="lg">
-                    Patient Registeation
+                    Patient Registration
                 </Button>{' '}
                 <Button variant="primary" size="lg">
                     HIP
