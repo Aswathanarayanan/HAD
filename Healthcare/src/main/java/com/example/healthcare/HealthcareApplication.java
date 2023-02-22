@@ -30,10 +30,10 @@ public class HealthcareApplication implements CommandLineRunner {
         User user2 = new User("jane.doe@example.com", "password456");
         userRepository.save(user2);
 
-        Patient patient1 = new Patient(1, "91-3545-5326-7435", "johndoe@sbx", "John Doe", "Male", 1985, 5, 10, "Electronic City", "6574839232");
-        patientRepository.save(patient1);
-
-        Patient patient2 = new Patient(2, "92-3746-5896-9435", "janedoe@sbx", "Jane Doe", "Female", 1990, 8, 20, "ESR Layout", "8765473645");
-        patientRepository.save(patient2);
+//        Patient patient1 = new Patient(1, "91-3545-5326-7435", "johndoe@sbx", "John Doe", "Male", 1985, 5, 10, "Electronic City", "6574839232");
+//        patientRepository.save(patient1);
+//
+//        Patient patient2 = new Patient(2, "92-3746-5896-9435", "janedoe@sbx", "Jane Doe", "Female", 1990, 8, 20, "ESR Layout", "8765473645");
+//        patientRepository.save(patient2);
     }
 }
